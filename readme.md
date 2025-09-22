@@ -4,7 +4,7 @@ This package allows you to easily make requests to the new Uber Eats Marketplace
 ## Requirements
 
 - PHP >= 8.3
-- Laravel >= 11.0
+- Laravel 11.x / 12.x
 
 ## Installation
 
