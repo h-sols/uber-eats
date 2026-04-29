@@ -13,21 +13,21 @@ class WebhookController extends Controller
 {
     public function handle(Request $request)
     {
-//        if (! $this->hasValidSignature($request)) {
-//            return response()->json('Invalid signature', 401);
-//        }
+        if (! $this->hasValidSignature($request)) {
+            return response()->json('Invalid signature', 401);
+        }
 
         $webhook = $this->transformNotification($request);
 
-//        try {
+        try {
             Event::dispatch($webhook->eventName(), $webhook);
 
             return response()->noContent(200, ['Content-Type' => 'application/json']);
-//        } catch (Exception $e) {
-//            Log::error($e->getMessage());
-//
-//            return response()->json('Error handling webhook', 500);
-//        }
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+
+            return response()->json('Error handling webhook', 500);
+        }
     }
 
     private function transformNotification(Request $request): UberEatsWebhook
